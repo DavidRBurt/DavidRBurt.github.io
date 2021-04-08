@@ -8,5 +8,4 @@ paperurl: 'http://jmlr.org/papers/v21/19-1015.html'
 citation: 
 ---
 David R. Burt,  Carl Edward Rasmussen,  Mark van der Wilk.
-
 [Proceedings](http://jmlr.org/papers/v21/19-1015.html){: .btn .btn-outline } [Arxiv](https://arxiv.org/abs/2008.00323){: .btn .btn-outline }.
