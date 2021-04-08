@@ -3,7 +3,7 @@ title: "Bandit optimisation of functions in the Matérn kernel RKHS"
 collection: publications
 permalink: /publication/2020-01-01-Bandit-optimisation-of-functions-in-the-Matern-kernel-RKHS
 date: 2020-01-01
-venue: 'Artificial Intelligence and Statistics (AISTATS) 2020.'
+venue: 'Artificial Intelligence and Statistics (AISTATS)'
 
 ---
 David Janz,  David R. Burt,  Javier González

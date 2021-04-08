@@ -6,4 +6,4 @@ date: 2020-01-01
 venue: 'Journal of Machine Learning Research'
 ---
 David R. Burt,  Carl Edward Rasmussen,  Mark van der Wilk.
-[Article](http://jmlr.org/papers/v21/19-1015.html){: .btn .btn-outline target="_blank"} [Arxiv](https://arxiv.org/abs/2008.00323){: .btn .btn-outline target="_blank"}.
+[Article](http://jmlr.org/papers/v21/19-1015.html){: .btn .btn-outline target="_blank"} [Arxiv](https://arxiv.org/abs/2008.00323){: .btn .btn-outline target="_blank"}. Extendend Versions of Rates of Convergence for Sparse Variational Gaussian Process Regression"
