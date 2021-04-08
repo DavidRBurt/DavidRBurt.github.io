@@ -3,10 +3,10 @@ title: "Convergence of Sparse Variational Inference in Gaussian Processes Regres
 collection: publications
 permalink: /publication/2020-01-01-Convergence-of-Sparse-Variational-Inference-in-Gaussian-Processes-Regression
 date: 2020-01-01
-venue: 'J. Mach. Learn. Res.'
+venue: 'Journal of Machine Learning Research'
 paperurl: 'http://jmlr.org/papers/v21/19-1015.html'
 citation: 
 ---
 David R. Burt,  Carl Edward Rasmussen,  Mark van der Wilk.
 
-[Proceedings](http://jmlr.org/papers/v21/19-1015.html){: .btn .btn-outline }. [Arxiv](https://arxiv.org/abs/2008.00323){: .btn .btn-outline }.
+[Proceedings](http://jmlr.org/papers/v21/19-1015.html){: .btn .btn-outline } [Arxiv](https://arxiv.org/abs/2008.00323){: .btn .btn-outline }.
