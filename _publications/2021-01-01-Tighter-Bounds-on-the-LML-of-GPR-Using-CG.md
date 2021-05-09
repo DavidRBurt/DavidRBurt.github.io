@@ -3,7 +3,7 @@ title: "Tighter Bounds on the Log Marginal Likelihood of Gaussian Process Regres
 collection: publications
 permalink: /publication/2021-01-01-Tighter-Bounds-on-the-LML-of-GPR-Using-CG
 date: 2021-01-01
-venue: 'International Conference on Machine Learning (ICML). To appear.'
+venue: 'International Conference on Machine Learning (ICML). To appear'
 
 ---
 Artem Artemev\*, David R. Burt\*,  Mark van der Wilk
