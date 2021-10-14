@@ -7,4 +7,4 @@ venue: 'Artificial Intelligence and Statistics (AISTATS)'
 
 ---
 David Janz,  David R. Burt,  Javier González
-[Proceedings](http://proceedings.mlr.press/v108/janz20a.html){: .btn .btn-outline target="_blank"} [Arxiv](https://arxiv.org/abs/2001.10396){: .btn .btn-outline target="_blank"} [Code](djanz.org/pgp_ucb/code)
+[Proceedings](http://proceedings.mlr.press/v108/janz20a.html){: .btn .btn-outline target="_blank"} [Arxiv](https://arxiv.org/abs/2001.10396){: .btn .btn-outline target="_blank"} [Code](http://djanz.org/pgp_ucb/code){: .btn .btn-outline target="_blank"}
