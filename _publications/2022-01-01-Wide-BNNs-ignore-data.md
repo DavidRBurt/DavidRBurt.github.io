@@ -1,5 +1,5 @@
 ---
-title: "Rates of Convergence for Sparse Variational Gaussian Process Regression"
+title: "Wide Mean-Field Bayesian Neural Networks Ignore the Data"
 collection: publications
 permalink: /publication/2022-01-01-Wide-BNNs-ignore-data
 date: 2022-01-01
