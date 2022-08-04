@@ -5,7 +5,7 @@ title: "GP Bibliography"
 
 A list of Gaussian process publications, with an emphasis on the machine learning literature sorted by topics and keywords. There is a landing page for the various topics with a brief description and subtopics as well as review papers. 
 
-A .bib file corresponding to the references in this bibliography is provided for download. [bib](/files/gpbib.bib){: .btn .btn-outline target="_blank"} 
+A .bib file corresponding to the references in this bibliography is provided for [download](/files/gpbib.bib).
 
 Please contact me via email with any comments or suggestions (especially if you spot typos in the .bib file!).
 
