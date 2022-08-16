@@ -8,4 +8,4 @@ redirect_from:
   - /about.html
 ---
 
-I am a PhD student in the [Machine Learning Group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge. I am supervised by [Professor Carl Edward Rasmussen](http://mlg.eng.cam.ac.uk/carl/) and advised by [Professor Richard E. Turner](http://cbl.eng.cam.ac.uk/Public/Turner/). My research has been mostly in the area of approximate Bayesian inference. I am particularly interested in variational inference and scalable Gaussian process regression.
+I am joining [Tamara Broderick's](https://tamarabroderick.com/) group at the MIT [Laboratory For Information and Decision Systems](https://lids.mit.edu/) as a postdoc in August 2022. Previously, I was a PhD student in the [Machine Learning Group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge, supervised by [Professor Carl Edward Rasmussen](http://mlg.eng.cam.ac.uk/carl/). My research has been mostly in the area of approximate Bayesian inference. I am particularly interested in variational inference and scalable Gaussian process regression.
