@@ -11,7 +11,7 @@ locale                   : "en-US"
 title                    : "David R. Burt"
 title_separator          : "-"
 name                     : &name "David R. Burt"
-description              : &description "PhD Student, University of Cambridge"
+description              : &description "Postdoc, MIT"
 url                      : https://DavidRBurt.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "DavidRBurt.github.io"
@@ -79,7 +79,7 @@ author:
   location         : "Cambridge, UK"
   employer         :
   pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=aJvwvboAAAAJ&hl"
+  googlescholar    : "https://scholar.google.com/citations?user=Kve55S4AAAAJ"
   email            :
   researchgate     :  
   uri              :
