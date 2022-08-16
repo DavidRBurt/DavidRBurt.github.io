@@ -75,8 +75,8 @@ analytics:
 author:
   name             : "David R. Burt"
   avatar           : "profile.jpg"
-  bio              : "PhD Student in Machine Learning"
-  location         : "Cambridge, UK"
+  bio              : "Postdoc in Machine Learning"
+  location         : "Boston, MA, USA"
   employer         :
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=Kve55S4AAAAJ"
@@ -84,7 +84,7 @@ author:
   researchgate     :  
   uri              :
   bitbucket        :
-  github           : "davidburt2"
+  github           : "davidrburt"
   linkedin         :
   orcid            :
   stackoverflow    : 
