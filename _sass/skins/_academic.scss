@@ -1,0 +1,47 @@
+// =====================================================
+//  Sage–Saffron skin  (light + auto dark-mode)
+//  Minimal Mistakes ≥ 4.24 / Jekyll 3.9.x
+// =====================================================
+
+/* -------- Light theme -------- */
+$background-color          : #FAFAF7;   // cream
+$text-color                : #202124;   // near-black
+$muted-text-color          : #4B4B50;   // mid gray for metadata
+$primary-color             : #264653;   // slate-green (headings, links)
+$link-color                : $primary-color;
+$link-color-hover          : lighten($primary-color, 12%);
+
+$accent-color              : #E9A820;   // saffron (buttons, badges)
+$border-color              : #E0E0E0;
+$code-background-color     : #F3F4F4;
+
+$masthead-link-color       : $text-color;
+$masthead-link-color-hover : $primary-color;
+$navicon-link-color-hover  : mix(#fff, $primary-color, 80%);
+
+$footer-background-color   : $primary-color;
+$footer-link-color         : #ffffff;
+$footer-link-color-hover   : #ffffff;
+
+/* -------- Dark-mode overrides -------- */
+@media (prefers-color-scheme: dark) {
+  $background-color        : #121212;
+  $text-color              : #E4E4E4;
+  $muted-text-color        : #9A9A9A;
+
+  $primary-color           : #6FB7C8;   // lighter teal for contrast
+  $link-color              : $primary-color;
+  $link-color-hover        : lighten($primary-color, 15%);
+
+  $accent-color            : #F6C553;   // softer saffron
+  $border-color            : #2A2A2A;
+  $code-background-color   : #1A1A1A;
+
+  $footer-background-color : $primary-color;
+  $footer-link-color       : #ffffff;
+}
+
+/* Keep footer icons white */
+.page__footer-follow .social-icons .svg-inline--fa {
+  color: inherit;
+}
