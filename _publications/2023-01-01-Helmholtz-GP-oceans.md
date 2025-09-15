@@ -7,4 +7,4 @@ venue: 'International Conference on Machine Learning (ICML)'
 
 ---
 Renato Berlinghieri, Brian L. Trippe, David R. Burt, Ryan Giordano, Kaushik Srinivasan, Tamay Özgökmen, Junfei Xia, Tamara Broderick
-[Arxiv](https://arxiv.org/abs/2302.10364){: .btn .btn-outline target="_blank"} [Proceedings](https://proceedings.mlr.press/v202/berlinghieri23a.html){: .btn .btn-outline target="_blank"} [Code](https://github.com/renatoberlinghieri/Helmholtz-GP){: .btn .btn-outline target="_blank"}
+[Arxiv](https://arxiv.org/abs/2302.10364){: .btn .btn-outline target="_blank"}
