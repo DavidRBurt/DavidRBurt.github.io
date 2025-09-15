@@ -73,8 +73,11 @@
   display: table-cell;
   vertical-align: top;
   width: 36px;
+  object-fit: cover;
+  object-position: 50% 40%;  // ← show more of the top 60% of the image
+  /* 50% = horizontal center, 40% = 40% down from the top */
   // set width only, for non-square avatars
-  height: 48px;
+  // height: 48px;
 
   @include breakpoint($large) {
     display: block;
@@ -84,7 +87,10 @@
 
   img {
     max-width: 175px;
-    border-radius: 0;
+    width: 175px;       // ← ensure it's square
+    height: 175px;      // ← ensure it's square
+    object-fit: cover;  // ← crop to fill
+    border-radius: 30%;
 
     @include breakpoint($large) {
       padding: 5px;
