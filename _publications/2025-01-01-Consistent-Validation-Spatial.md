@@ -3,7 +3,7 @@ title: "Consistent Validation for Predictive Methods in Spatial Settings"
 collection: publications
 permalink: /publication/2025-01-01-Consistent-Validation-Spatial
 date: 2025-01-01
-venue: 'Artificial Intelligence and Statistics (AISTATS) 2025'
+venue: 'Artificial Intelligence and Statistics (AISTATS)'
 # tags: [spatial, validation, prediction, uncertainty]
 ---
 David R. Burt, Yunyi Shen, Tamara Broderick
