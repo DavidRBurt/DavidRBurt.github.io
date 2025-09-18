@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2025-09-15-Lipschitz-Spatial-Association
 # Use today's date or adjust if needed
 date: 2025-08-15
-venue: 'Preprint'
+venue: 'Neural Information Processing Systems (NeurIPS)'
 # Optional tags field
 # tags: [spatial, uncertainty, lipschitz, gaussian-processes]
 ---
