@@ -7,7 +7,6 @@ venue: 'Artificial Intelligence and Statistics (AISTATS)'
 # tags: [spatial, validation, prediction, uncertainty]
 ---
 David R. Burt, Yunyi Shen, Tamara Broderick
-
 [Arxiv](https://arxiv.org/abs/2402.03527){: .btn .btn-outline target="_blank"} [Proceedings](https://proceedings.mlr.press/v258/burt25a.html){: .btn .btn-outline target="_blank"}
 
 <!-- Abstract (optional): Add a short summary here if desired. -->
