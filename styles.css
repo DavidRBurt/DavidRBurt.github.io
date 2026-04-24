@@ -113,6 +113,14 @@ h3 {
     margin-top: 0;
 }
 
+footer {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin: 2rem 0 1.5rem;
+    padding: 0 1rem;
+}
+
 @media (max-width: 760px) {
     .about {
         flex-direction: column;
