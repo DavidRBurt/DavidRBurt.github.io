@@ -41,6 +41,29 @@ main {
     padding: 0 1rem;
 }
 
+.about {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 2rem;
+}
+
+.about-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+.about-lead {
+    margin: 0;
+}
+
+.about-rest {
+    grid-column: 2;
+}
+
 h1, h2 {
     color: #222;
     font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
@@ -87,4 +110,16 @@ h3 {
 
 .publication-section ul {
     margin-top: 0;
+}
+
+@media (max-width: 760px) {
+    .about {
+        grid-template-columns: 96px 1fr;
+        gap: 1rem;
+    }
+
+    .about-rest {
+        grid-column: 1 / -1;
+        margin-top: 0.25rem;
+    }
 }
