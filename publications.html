@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - David R. Burt</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>David R. Burt</h1>
+        <p style="margin: 0.0rem 0 0.5rem 0; font-size: 1.1rem; color: #666;">dburt@mit.edu</p>
+        <nav>
+            <a href="index.html">About</a> |
+            <a href="publications.html">Publications</a> |
+            <a href="https://github.com/davidrburt" target="_blank">GitHub</a>
+        </nav>
+    </header>
+    <main>
+        <p>You can also find my articles on <u><a href="https://scholar.google.com/citations?user=Kve55S4AAAAJ">my Google Scholar profile</a>.</u></p>
+        <div id="publications-list">
+            <p>Loading publications...</p>
+        </div>
+    </main>
+    <script>
+        async function loadPublications() {
+            try {
+                console.log('Fetching bib file...');
+                const response = await fetch('files/cv.bib');
+                console.log('Response status:', response.status);
+                const bibText = await response.text();
+                console.log('Bib text length:', bibText.length);
+                const publications = parseBib(bibText);
+                console.log('Parsed publications:', publications);
+                displayPublications(publications);
+            } catch (error) {
+                document.getElementById('publications-list').innerHTML = '<p>Error loading publications.</p>';
+                console.error('Error loading bib file:', error);
+            }
+        }
+
+        function parseBib(bibText) {
+            console.log('Parsing bib text:', bibText.substring(0, 200));
+            const entries = [];
+            // Split by @ to get individual entries
+            const entryBlocks = bibText.split('@').slice(1); // Remove first empty part
+            console.log('Entry blocks:', entryBlocks.length);
+            
+            entryBlocks.forEach((block, index) => {
+                console.log(`Processing block ${index}:`, block.substring(0, 100));
+                const lines = block.trim().split('\n');
+                if (lines.length === 0) return;
+                
+                // First line: type{key,
+                const firstLine = lines[0].trim();
+                console.log('First line:', firstLine);
+                const typeMatch = firstLine.match(/^(\w+)\{([^,]+),?$/);
+                if (!typeMatch) {
+                    console.log('No type match');
+                    return;
+                }
+                
+                const type = typeMatch[1];
+                const key = typeMatch[2];
+                console.log('Type:', type, 'Key:', key);
+                
+                const fields = {};
+                // Process remaining lines for fields
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line === '}') break; // End of entry
+                    
+                    const parts = line.split('=');
+                    if (parts.length === 2) {
+                        const fieldName = parts[0].trim();
+                        let fieldValue = parts[1].trim();
+                        if (fieldValue.startsWith('{') && fieldValue.endsWith('},')) {
+                            fieldValue = fieldValue.slice(1, -2); // Remove { and },
+                        } else if (fieldValue.startsWith('{') && fieldValue.endsWith('}')) {
+                            fieldValue = fieldValue.slice(1, -1); // Remove { and }
+                        }
+                        fields[fieldName] = fieldValue;
+                        console.log('Field:', fieldName, '=', fieldValue);
+                    } else {
+                        console.log('No field match for:', line);
+                    }
+                }
+                
+                entries.push({ type, key, fields });
+            });
+            
+            return entries;
+        }
+
+        function categorizePublications(publications) {
+            const categories = {
+                journals: [],
+                conferences: [],
+                workshops: [],
+                preprints: []
+            };
+            
+            publications.forEach(pub => {
+                if (pub.type === 'article') {
+                    categories.journals.push(pub);
+                } else if (pub.type === 'misc') {
+                    categories.preprints.push(pub);
+                } else if (pub.type === 'inproceedings') {
+                    const booktitle = pub.fields.booktitle || '';
+                    const isWorkshop = /workshop|symposium/i.test(booktitle);
+                    if (isWorkshop) {
+                        categories.workshops.push(pub);
+                    } else {
+                        categories.conferences.push(pub);
+                    }
+                }
+            });
+            
+            // Sort each category by year descending
+            Object.keys(categories).forEach(key => {
+                categories[key].sort((a, b) => (b.fields.year || 0) - (a.fields.year || 0));
+            });
+            
+            return categories;
+        }
+
+        function displayPublications(publications) {
+            console.log('Displaying publications:', publications);
+            const list = document.getElementById('publications-list');
+            if (publications.length === 0) {
+                list.innerHTML = '<p>No publications found.</p>';
+                return;
+            }
+            
+            const categories = categorizePublications(publications);
+            console.log('Categorized publications:', categories);
+            
+            const container = document.createElement('div');
+            
+            const categoryInfo = [
+                { key: 'journals', title: 'Journal Papers', count: categories.journals.length },
+                { key: 'conferences', title: 'Conference Proceedings', count: categories.conferences.length },
+                { key: 'workshops', title: 'Workshop Papers & Preprints', count: categories.workshops.length },
+                { key: 'preprints', title: '', count: 0 } // Merge preprints into workshops section
+            ];
+            
+            categoryInfo.forEach(cat => {
+                if (cat.key === 'preprints') return; // Skip, will be merged
+                
+                let pubs = cat.key === 'workshops' ? 
+                    categories.workshops.concat(categories.preprints) : 
+                    categories[cat.key];
+                
+                // Sort by year descending
+                pubs.sort((a, b) => (b.fields.year || 0) - (a.fields.year || 0));
+                
+                if (pubs.length === 0) return;
+                
+                const section = document.createElement('div');
+                section.className = 'publication-section';
+                
+                const heading = document.createElement('h3');
+                heading.textContent = cat.title;
+                section.appendChild(heading);
+                
+                const ul = document.createElement('ul');
+                pubs.forEach(pub => {
+                    const title = stripBraces(pub.fields.title || 'Untitled');
+                    const authors = stripBraces(pub.fields.author || 'Unknown author');
+                    const venue = stripBraces(pub.fields.booktitle || pub.fields.journal || '');
+                    const year = pub.fields.year || 'Unknown year';
+                    const note = pub.fields.note ? stripBraces(pub.fields.note) : '';
+                    
+                    const li = document.createElement('li');
+                    let content = `${authors}. `;
+                    if (pub.fields.url) {
+                        content += `<a href="${pub.fields.url}" target="_blank">${title}</a>`;
+                    } else {
+                        content += title;
+                    }
+                    if (venue) {
+                        content += `. <em>${venue}</em>`;
+                    }
+                    content += `, ${year}`;
+                    if (note) {
+                        content += ` (${note})`;
+                    }
+                    
+                    li.innerHTML = content;
+                    ul.appendChild(li);
+                });
+                section.appendChild(ul);
+                container.appendChild(section);
+            });
+            
+            list.innerHTML = '';
+            list.appendChild(container);
+        }
+
+        function stripBraces(text) {
+            if (!text) return text;
+            // Handle \href{url}{text} commands, allowing nested braces in text
+            text = text.replace(/\\href\{([^}]*)\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '<a href="$1" target="_blank">$2</a>');
+            // Strip LaTeX formatting commands
+            text = text.replace(/\\[a-zA-Z]+\{([^}]*)\}/g, '$1'); // Remove commands like \textbf{ }, \textsuperscript{ }
+            text = text.replace(/\\&/g, '&'); // Handle \& 
+            text = text.replace(/~/g, ' '); // Replace ~ with space
+            // Handle LaTeX math: $_sub$ -> <sub>sub</sub>, $^sup$ -> <sup>sup</sup>
+            text = text.replace(/\$_([^$]*)\$/g, '<sub>$1</sub>');
+            text = text.replace(/\$\^([^$]*)\$/g, '<sup>$1</sup>');
+            // Remove remaining $ if any
+            text = text.replace(/\$/g, '');
+            // Then strip remaining braces
+            text = text.replace(/\{([^}]*)\}/g, '$1');
+            return text;
+        }
+
+        // Load publications when page loads
+        window.addEventListener('DOMContentLoaded', loadPublications);
+    </script>
+</body>
+</html>
