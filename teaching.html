@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching - David R. Burt</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>David R. Burt</h1>
+        <p style="margin: 0.0rem 0 0.5rem 0; font-size: 1.1rem; color: #666;">dburt@umass.edu</p>
+        <nav>
+            <a href="index.html">About</a> |
+            <a href="publications.html">Publications</a> |
+            <a href="teaching.html" aria-current="page">Teaching</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Teaching</h2>
+
+        <section class="teaching-section" aria-labelledby="courses-taught">
+            <h3 id="courses-taught">Courses Taught</h3>
+            <article class="course">
+                <h4>Introduction to Statistical Learning (Statistc 540, UMass Amherst)</h4>
+                <dl class="course-details">
+                    <div>
+                        <dt>Semester</dt>
+                        <dd><a href="statistc-540-fall-2026.html">Fall 2026</a></dd>
+                    </div>
+                </dl>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <small>&copy; 2024-2026 David R. Burt &middot; <a href="https://github.com/davidrburt" target="_blank" rel="noopener noreferrer">GitHub</a> &middot; Last updated <time class="last-updated">August 2026</time></small>
+    </footer>
+    <script>
+        (function setLastUpdated() {
+            const updated = new Date(document.lastModified);
+            if (Number.isNaN(updated.getTime())) return;
+            const display = updated.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const iso = updated.toISOString().slice(0, 10);
+            document.querySelectorAll('.last-updated').forEach((el) => {
+                el.textContent = display;
+                el.setAttribute('datetime', iso);
+            });
+        })();
+    </script>
+</body>
+</html>

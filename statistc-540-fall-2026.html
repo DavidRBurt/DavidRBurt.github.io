@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistc 540, Fall 2026 - David R. Burt</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>David R. Burt</h1>
+        <p style="margin: 0.0rem 0 0.5rem 0; font-size: 1.1rem; color: #666;">dburt@umass.edu</p>
+        <nav>
+            <a href="index.html">About</a> |
+            <a href="publications.html">Publications</a> |
+            <a href="teaching.html">Teaching</a>
+        </nav>
+    </header>
+    <main>
+        <p><a href="teaching.html">&larr; Teaching</a></p>
+        <h2>Introduction to Statistical Learning</h2>
+        <p class="course-subtitle">Statistc 540 &middot; Fall 2026 &middot; UMass Amherst</p>
+
+        <section class="course-page-section" aria-labelledby="syllabus">
+            <h3 id="syllabus">Syllabus</h3>
+            <p>The syllabus will be posted before the start of the semester.</p>
+        </section>
+
+        <section class="course-page-section" aria-labelledby="course-calendar">
+            <h3 id="course-calendar">Course Calendar</h3>
+            <p>The course calendar will be posted before the start of the semester.</p>
+        </section>
+
+        <section class="course-page-section" aria-labelledby="office-hours">
+            <h3 id="office-hours">Office Hours</h3>
+            <p>Office hours are TBD.</p>
+        </section>
+
+        <section class="course-page-section" aria-labelledby="course-notes">
+            <h3 id="course-notes">Course Notes</h3>
+            <p>Notes will be linked here as they become available.</p>
+            <ul class="course-notes-list">
+                <li><a href="files/statistc-540-fall-2026/class-01-introduction-statistical-learning.pdf">September 8, 2026: Introduction to the Course and Statistical Learning</a></li>
+                <li>September 10, 2026</li>
+                <li>September 15, 2026</li>
+                <li>September 17, 2026</li>
+                <li>September 22, 2026</li>
+                <li>September 24, 2026</li>
+                <li>September 29, 2026</li>
+                <li>October 1, 2026</li>
+                <li>October 6, 2026</li>
+                <li>October 8, 2026</li>
+                <li>October 13, 2026</li>
+                <li>October 15, 2026</li>
+                <li>October 20, 2026</li>
+                <li>October 22, 2026</li>
+                <li>October 27, 2026</li>
+                <li>October 29, 2026</li>
+                <li>November 5, 2026</li>
+                <li>November 10, 2026</li>
+                <li>November 12, 2026</li>
+                <li>November 17, 2026</li>
+                <li>November 19, 2026</li>
+                <li>December 1, 2026</li>
+                <li>December 3, 2026</li>
+                <li>December 8, 2026</li>
+                <li>December 10, 2026</li>
+                <li>December 15, 2026</li>
+            </ul>
+        </section>
+
+        <section class="course-page-section" aria-labelledby="assignments">
+            <h3 id="assignments">Assignments</h3>
+            <p>Assignments will be posted here during the semester.</p>
+        </section>
+
+        <section class="course-page-section" aria-labelledby="useful-resources">
+            <h3 id="useful-resources">Useful Resources</h3>
+
+            <h4>Textbook</h4>
+            <ul>
+                <li><a href="https://www.statlearning.com/" target="_blank" rel="noopener noreferrer">An Introduction to Statistical Learning (ISL)</a></li>
+                <li><a href="https://hastie.su.domains/ElemStatLearn/main.html" target="_blank" rel="noopener noreferrer">The Elements of Statistical Learning (ESL)</a></li>
+            </ul>
+
+            <h4>Optional Supplementary Video Lectures</h4>
+            <ul>
+                <li><a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" target="_blank" rel="noopener noreferrer">ISL video lectures</a></li>
+            </ul>
+
+            <h4>Software</h4>
+            <ul>
+                <li><a href="https://cran.r-project.org/" target="_blank" rel="noopener noreferrer">Download R</a></li>
+                <li><a href="https://rmarkdown.rstudio.com/docs/" target="_blank" rel="noopener noreferrer">Install R Markdown</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <small>&copy; 2024-2026 David R. Burt &middot; <a href="https://github.com/davidrburt" target="_blank" rel="noopener noreferrer">GitHub</a> &middot; Last updated <time class="last-updated">August 2026</time></small>
+    </footer>
+    <script>
+        (function setLastUpdated() {
+            const updated = new Date(document.lastModified);
+            if (Number.isNaN(updated.getTime())) return;
+            const display = updated.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const iso = updated.toISOString().slice(0, 10);
+            document.querySelectorAll('.last-updated').forEach((el) => {
+                el.textContent = display;
+                el.setAttribute('datetime', iso);
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -123,6 +123,70 @@ h3 {
     margin-top: 0;
 }
 
+.teaching-section {
+    margin-bottom: 2rem;
+}
+
+.course {
+    border-left: 3px solid #007acc;
+    padding-left: 1rem;
+}
+
+.course h4 {
+    color: #222;
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+}
+
+.course-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin: 0;
+}
+
+.course-details div {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.course-details dt {
+    font-weight: 600;
+}
+
+.course-details dd {
+    margin: 0;
+}
+
+.course-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: -1rem;
+}
+
+.course-page-section {
+    margin-top: 2rem;
+}
+
+.course-page-section h4 {
+    color: #222;
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.25rem;
+}
+
+.course-page-section ul {
+    margin-top: 0.25rem;
+}
+
+.course-page-section li,
+.course-notes-list li {
+    margin-bottom: 0.4rem;
+}
+
 footer {
     text-align: center;
     color: #666;
