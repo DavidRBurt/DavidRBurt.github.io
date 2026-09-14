@@ -18,7 +18,7 @@ auto <- Auto[, c("weight", "mpg")]
 nrow(auto)
 ```
 
-# 2. Split the data to learn, choose, and evaluate
+# 2. Split the data
 
 We will now perform a train-validate-test split. The easiest way to do this is to shuffle the order of the data, and then split the data at the designated percentages. `sample()` shuffles the row numbers.
 

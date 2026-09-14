@@ -358,8 +358,8 @@ train-validation-test splits</h1>
 <ul>
 <li><a href="#the-auto-prediction-problem" id="toc-the-auto-prediction-problem">1. The Auto prediction
 problem</a></li>
-<li><a href="#split-the-data-to-learn-choose-and-evaluate" id="toc-split-the-data-to-learn-choose-and-evaluate">2. Split the data
-to learn, choose, and evaluate</a>
+<li><a href="#split-the-data" id="toc-split-the-data">2. Split the
+data</a>
 <ul>
 <li><a href="#plot-the-training-cars" id="toc-plot-the-training-cars">Plot the training cars</a></li>
 </ul></li>
@@ -395,8 +395,8 @@ auto &lt;- Auto[, c(&quot;weight&quot;, &quot;mpg&quot;)]
 nrow(auto)</code></pre>
 <pre><code>## [1] 392</code></pre>
 </div>
-<div id="split-the-data-to-learn-choose-and-evaluate" class="section level1">
-<h1>2. Split the data to learn, choose, and evaluate</h1>
+<div id="split-the-data" class="section level1">
+<h1>2. Split the data</h1>
 <p>We will now perform a train-validate-test split. The easiest way to
 do this is to shuffle the order of the data, and then split the data at
 the designated percentages. <code>sample()</code> shuffles the row
