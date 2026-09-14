@@ -1,0 +1,222 @@
+---
+title: "Class 3: The bias variance tradeoff and train-validation-test splits"
+subtitle: "STAT 540 | September 15, 2026"
+output:
+  html_document:
+    toc: true
+---
+
+# 1. The Auto prediction problem
+
+We will use the same `ISLR2::Auto` dataset as you are using in Homework 1. Each row describes a vehicle; `weight` is vehicle weight in pounds and `mpg` is miles per gallon. Our goal will be to predict mpg from weight as well as we can, and then evaluate the quality of the predictor we get. We will follow a common workflow in data analysis called a `train-validation-test' split.
+
+```{r load-data}
+# Install ISLR2 once before class if you have not used it yet:
+# install.packages("ISLR2")
+library(ISLR2)
+auto <- Auto[, c("weight", "mpg")]
+nrow(auto)
+```
+
+# 2. Split the data to learn, choose, and evaluate
+
+We will now perform a train-validate-test split. The easiest way to do this is to shuffle the order of the data, and then split the data at the designated percentages. `sample()` shuffles the row numbers.
+
+We first set a seed (so that we all get the same results). We then count the number of examples in the dataset, and use this to calculate how many examples will be used for training and validation. The function `floor()` rounds down to an integer, to make sure that the number of training examples and validation examples is a whole number. 
+
+The next lines assign roughly 60%, 20%, and 20% to the three groups. 
+```{r split-data}
+set.seed(25)
+rows <- sample(1:nrow(auto))
+n_train <- floor(0.60 * nrow(auto))
+n_validation <- floor(0.20 * nrow(auto))
+
+train_rows <- rows[1:n_train]
+validation_rows <- rows[(n_train + 1):(n_train + n_validation)]
+test_rows <- rows[(n_train + n_validation + 1):nrow(auto)]
+
+train <- auto[train_rows, ]
+validation <- auto[validation_rows, ]
+test <- auto[test_rows, ]
+
+c(training = nrow(train), validation = nrow(validation), test = nrow(test))
+```
+
+## Plot the training cars
+
+Always plot the data. 
+
+Start by plotting the weight and mpg for the training cars. Note: It's best practice to not use the test set at any point before evaluating prediction methods, as this can bias your analysis. This includes in exploratory plotting.
+
+```{r training-plot}
+plot(train$weight, train$mpg,
+     xlab = "Weight (lb)", ylab = "Fuel economy (mpg)",
+     main = "Training cars", pch = 19, col = "grey50")
+```
+
+**What mpg would you predict for a car weighing 3,000 pounds? Why?**
+
+# 3. Predict mpg with nearest neighbors
+
+Let's go through how to make this prediction with nearest neighbor regression. 
+
+```{r one-prediction}
+x0 <- 3000 # point we want to predict at
+k <- 5 # number of neighbors to use
+
+distance <- abs(train$weight - x0) # how far each car's weight is from 3000
+nearest <- order(distance)[1:k] # find the k closest weights
+train[nearest, ] # get the corresponding training examples and print these
+predicted_mpg <- mean(train$mpg[nearest]) # make a prediction by averaging these MPGs
+predicted_mpg # Actual prediction
+```
+
+
+```{r highlight-neighbors}
+plot(train$weight, train$mpg,
+     xlab = "Weight (lb)", ylab = "Fuel economy (mpg)",
+     main = paste("K =", k, "neighbors for a 3,000-pound car"),
+     pch = 19, col = "grey70")
+points(train$weight[nearest], train$mpg[nearest],
+       pch = 1, cex = 1.7, lwd = 2, col = "#155F8A")
+points(x0, predicted_mpg, pch = 8, cex = 2, lwd = 2, col = "#881C1E")
+abline(v = x0, lty = 2)
+```
+
+Change `k` to 1 and then 20; rerun these two chunks. Predict the effect before looking.
+
+## What does K change?
+
+We now wrap exactly the same calculation in a function so we can predict at many weight values. `x_new` is a list of input values. The loop fills in one prediction at a time.
+
+```{r knn-function}
+knn_predict <- function(x_train, y_train, x_new, k) {
+  prediction <- numeric(length(x_new)) 
+  for (i in 1:length(x_new)) { 
+    distance <- abs(x_train - x_new[i]) 
+    nearest <- order(distance)[1:k] 
+    prediction[i] <- mean(y_train[nearest]) 
+  }
+  return(prediction)
+}
+```
+
+
+```{r compare-curves}
+weight_grid <- seq(min(train$weight), max(train$weight), length.out = 200)
+k_show <- c(1, 10, 50, nrow(train))
+
+par(mfrow = c(2, 2))
+for (k in k_show) {
+  prediction <- knn_predict(train$weight, train$mpg, weight_grid, k)
+  plot(train$weight, train$mpg,
+       xlab = "Weight (lb)", ylab = "Fuel economy (mpg)",
+       main = paste("K =", k), pch = 19, col = "grey75")
+  lines(weight_grid, prediction, col = "#881C1C", lwd = 2)
+}
+```
+
+**Small K uses only a few cars with very similar weights. Large K averages more cars over a wider range of weights. Why might each choice make mistakes on new cars?**
+
+
+# 4. Choose K using validation error
+
+We want to pick the best (or at least a good enough) value of K. This was why we kept the validation data. (Why can't use use the training data for this task?). 
+
+MSE is the average squared difference between the observed and predicted mpg. We first calculate the MSE of a predictor for K=10 on the validation data.
+
+```{r one-validation-score}
+k <- 10
+validation_prediction <- knn_predict(train$weight, train$mpg,
+                                     validation$weight, k)
+errors <- validation$mpg - validation_prediction
+mean(errors^2)
+
+head(data.frame(observed = validation$mpg,
+                predicted = validation_prediction,
+                squared_error = errors^2))
+```
+
+## Compare several values of K
+
+We now consider a range of possible values of K. Our goal is to choose the one that generalizes best. We calculate the mean square error of each of the predictor corresponding to each of these K on the validation set.
+
+```{r compare-validation-scores}
+k_values <- c(1, 3, 5, 10, 15, 20, 30, 50, 80, nrow(train))
+training_mse <- numeric(length(k_values))
+validation_mse <- numeric(length(k_values))
+
+for (j in 1:length(k_values)) {
+  k <- k_values[j]
+  training_prediction <- knn_predict(train$weight, train$mpg,
+                                     train$weight, k)
+  validation_prediction <- knn_predict(train$weight, train$mpg,
+                                       validation$weight, k)
+  training_mse[j] <- mean((train$mpg - training_prediction)^2)
+  validation_mse[j] <- mean((validation$mpg - validation_prediction)^2)
+}
+
+results <- data.frame(K = k_values, training_MSE = training_mse,
+                      validation_MSE = validation_mse)
+results
+```
+
+```{r error-plot}
+plot(k_values, validation_mse, type = "b", pch = 19,
+     ylim = range(training_mse, validation_mse),
+     xlab = "Number of neighbors, K", ylab = "Mean squared error (mpg squared)",
+     main = "Choose K using validation error", col = "#881C1C")
+lines(k_values, training_mse, type = "b", pch = 1, lty = 2, col = "#155F8A")
+legend("topleft", c("Validation", "Training"),
+       col = c("#881C1C", "#155F8A"), lty = c(1, 2), pch = c(19, 1), bty = "n")
+```
+
+
+```{r select-k}
+best_position <- which.min(validation_mse)
+best_k <- k_values[best_position]
+best_k
+# which.min chooses the first minimum if scores are exactly tied.
+
+selected_prediction <- knn_predict(train$weight, train$mpg,
+                                   weight_grid, best_k)
+plot(train$weight, train$mpg,
+     xlab = "Weight (lb)", ylab = "Fuel economy (mpg)",
+     main = paste("Validation-selected K =", best_k), pch = 19, col = "grey70")
+lines(weight_grid, selected_prediction, col = "#881C1C", lwd = 2)
+```
+
+# 5. Fit with more cars, then evaluate on the test set
+
+**Once we have chosen K, we can use the training and validation cars together to make the final predictor.** Adding validation cars to the training data gives the predictor more examples and can provide closer neighbors for a new car. This often helps prediction, although improvement on a particular sample is not guaranteed.
+
+Keep the selected K fixed and combine the two sets with `rbind()`, which stacks their rows. For KNN, fitting with the combined data means using all those cars as potential neighbors.
+
+```{r combine-fitting-data}
+final_train <- rbind(train, validation)
+nrow(final_train)
+```
+
+We now evaluate this final predictor on the test cars. Their responses have played no role in choosing K or supplying neighbors. It's always good to compare to a simple baseline. Does anyone have thoughts as to a really simple basline for predicting mpg based on this dataset?
+
+
+```{r final-test}
+test_prediction <- knn_predict(final_train$weight, final_train$mpg,
+                               test$weight, best_k)
+test_mse <- mean((test$mpg - test_prediction)^2)
+
+baseline_prediction <- mean(final_train$mpg)
+baseline_mse <- mean((test$mpg - baseline_prediction)^2)
+
+test_results <- data.frame(
+  method = c(paste("KNN, K =", best_k), "Predict All Car Mean"),
+  MSE = c(test_mse, baseline_mse),
+  RMSE = sqrt(c(test_mse, baseline_mse))
+)
+test_results
+```
+
+RMSE is the square root of the average squared error, so it is in mpg. With this split, validation selected **K = `r best_k`**. The final KNN predictor has test RMSE **`r round(sqrt(test_mse), 2)` mpg**, compared with **`r round(sqrt(baseline_mse), 2)` mpg** for the mean benchmark.
+
+
+
